@@ -5,9 +5,8 @@ sample_output = '20 12 17 21'
 
 def count_nucleotides(dna_string):
     nucleotides = ['A', 'C', 'G', 'T']
-    counts = [(nucleotide, dna_string.count(nucleotide)) for nucleotide in nucleotides]
-
-    print(' '.join([str(count[1]) for count in counts]))
+    counts = [str(dna_string.count(nucleotide)) for nucleotide in nucleotides]
+    print(' '.join(counts))
     
 
 if __name__ == '__main__':

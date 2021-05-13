@@ -6,7 +6,7 @@ sample_output = '20 12 17 21'
 def count_nucleotides(dna_string):
     nucleotides = ['A', 'C', 'G', 'T']
     counts = [str(dna_string.count(nucleotide)) for nucleotide in nucleotides]
-    print(' '.join(counts))
+    return ' '.join(counts)
     
 
 if __name__ == '__main__':
@@ -20,4 +20,7 @@ if __name__ == '__main__':
     else:
         input_dataset = sample_dataset
 
-    count_nucleotides(input_dataset)
+    solution = count_nucleotides(input_dataset)
+    if solution == sample_output:
+        print('True')
+    print(solution)

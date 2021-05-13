@@ -4,7 +4,7 @@ sample_dataset = 'GATGGAACTTGACTACGTAAATT'
 sample_output = 'GAUGGAACUUGACUACGUAAAUU'
 
 def transcribe(dna_string):
-    print(dna_string.replace('T', 'U'))
+    return dna_string.replace('T', 'U')
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -17,4 +17,7 @@ if __name__ == '__main__':
     else:
         input_dataset = sample_dataset
 
-    transcribe(input_dataset)
+    solution = transcribe(input_dataset)
+    if solution == sample_output:
+        print('True')
+    print(solution)

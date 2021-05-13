@@ -18,6 +18,5 @@ if __name__ == '__main__':
         input_dataset = sample_dataset
 
     solution = transcribe(input_dataset)
-    if solution == sample_output:
-        print('True')
+
     print(solution)

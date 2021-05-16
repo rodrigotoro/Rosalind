@@ -1,25 +1,28 @@
 import argparse
 
-sample_dataset = 'AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC'
-sample_output = '20 12 17 21'
+sample_dataset = (
+    "AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC"
+)
+sample_output = "20 12 17 21"
+
 
 def count_nucleotides(dna_string):
-    nucleotides = ['A', 'C', 'G', 'T']
+    nucleotides = ["A", "C", "G", "T"]
     counts = [str(dna_string.count(nucleotide)) for nucleotide in nucleotides]
-    return ' '.join(counts)
-    
+    return " ".join(counts)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('-i', '--input')
+    parser.add_argument("-i", "--input")
     args = parser.parse_args()
 
     if args.input:
-        with open(args.input, 'r') as f:
+        with open(args.input, "r") as f:
             input_dataset = f.read()
     else:
         input_dataset = sample_dataset
 
     solution = count_nucleotides(input_dataset)
-    
+
     print(solution)

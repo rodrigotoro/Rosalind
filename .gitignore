@@ -1,4 +1,5 @@
 run_exercise.sh
+.vscode
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

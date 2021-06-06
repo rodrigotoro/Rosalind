@@ -12,6 +12,9 @@ class Fasta:
         if len(self.sequence) == 0:
             raise ValueError("FASTA sequence must be at least 1 bp long")
 
+    def __repr__(self):
+        return self.sequence
+
     def __len__(self):
         return len(self.sequence)
 

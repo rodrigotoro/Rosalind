@@ -27,11 +27,14 @@ def get_longest_common_substring(multi_fasta_string):
             kmers1 = sorted_fastas[0].get_kmers(length=i)
             for fasta in sorted_fastas[1:]:
                 kmers2 = fasta.get_kmers(length=i)
-                common_kmers = kmers1 & kmers2
+                if not common_kmers:
+                    common_kmers = kmers1 & kmers2
+                else:
+                    common_kmers = common_kmers & kmers2
                 if not common_kmers:
                     break
         else:
-            return common_kmers.pop()
+            return common_kmers
 
 
 if __name__ == "__main__":

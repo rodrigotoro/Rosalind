@@ -26,22 +26,31 @@ class Fasta:
 
     def get_kmers(self, length=None, min_length=2, max_length=None):
         kmers = set()
+        len_seq = len(self)
         if length is None:
-            for kmer_length in range(min_length, len(self)):
-                if max_length:
-                    if kmer_length == max_length + 1:
-                        break
-                for pos in range(len(self) + 1 - kmer_length):
-                    kmers.add(self.sequence[pos : pos + kmer_length])
+            if max_length is None or max_length > len_seq:
+                max_length = len_seq
+            for kmer_length in range(min_length, max_length + 1):
+                for pos in range(len_seq + 1 - kmer_length):
+                    kmer = self.sequence[pos : pos + kmer_length]
+                    kmers.add(kmer)
         else:
-            for pos in range(len(self) + 1 - length):
+            if max_length:
+                raise ValueError(
+                    'Arguments "length" and "max_length" are mutually exclusive'
+                )
+            if length > len_seq:
+                raise ValueError(
+                    f"Requested length is longer than length of sequence (length {len(self)})"
+                )
+            for pos in range(len_seq + 1 - length):
                 kmers.add(self.sequence[pos : pos + length])
 
         return kmers
 
 
 if __name__ == "__main__":
-    fasta_string = ">Test1\nACTGAACTGTAGCTGGTGGTAC"
+    fasta_string = ">Test1\nACTGA"
     f = Fasta(fasta_string)
-    a = f.get_kmers(min_length=10)
+    a = f.get_kmers(length=6)
     print(a)

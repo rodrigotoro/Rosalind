@@ -24,10 +24,13 @@ class Fasta:
     def __getitem__(self, key):
         return self.sequence[key]
 
-    def get_kmers(self, length=None):
+    def get_kmers(self, length=None, min_length=2, max_length=None):
         kmers = set()
         if length is None:
-            for kmer_length in range(2, len(self)):
+            for kmer_length in range(min_length, len(self)):
+                if max_length:
+                    if kmer_length == max_length + 1:
+                        break
                 for pos in range(len(self) + 1 - kmer_length):
                     kmers.add(self.sequence[pos : pos + kmer_length])
         else:
@@ -37,8 +40,8 @@ class Fasta:
         return kmers
 
 
-# if __name__ == "__main__":
-#     fasta_string = ">Test1\nACTGAACTGTAGCTGGTGGTAC"
-#     f = Fasta(fasta_string)
-#     a = f.get_kmers()
-#     print(a)
+if __name__ == "__main__":
+    fasta_string = ">Test1\nACTGAACTGTAGCTGGTGGTAC"
+    f = Fasta(fasta_string)
+    a = f.get_kmers(min_length=10)
+    print(a)

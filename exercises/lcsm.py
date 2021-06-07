@@ -18,21 +18,20 @@ def get_longest_common_substring(multi_fasta_string):
     ]
 
     sorted_fastas = sorted(fastas, key=lambda x: len(x))
+    shortest_fasta_len = len(sorted_fastas[0])
 
     common_kmers = set()
 
-    for i, fasta in enumerate(sorted_fastas):
-        max_kmer_length = None
-        if len(common_kmers) > 0:
-            max_kmer_length = len(max(common_kmers, key=len))
-
-        kmers = fasta.get_kmers(max_length=max_kmer_length)
-        if i == 0:
-            common_kmers = kmers
+    for i in range(shortest_fasta_len, 0, -1):
+        if not common_kmers:
+            kmers1 = sorted_fastas[0].get_kmers(length=i)
+            for fasta in sorted_fastas[1:]:
+                kmers2 = fasta.get_kmers(length=i)
+                common_kmers = kmers1 & kmers2
+                if not common_kmers:
+                    break
         else:
-            common_kmers = common_kmers & kmers
-
-    return max(common_kmers, key=len)
+            return common_kmers.pop()
 
 
 if __name__ == "__main__":

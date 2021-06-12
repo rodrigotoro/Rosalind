@@ -19,25 +19,14 @@ P20840_SAG1_YEAST
 """
 
 
-def get_uniprot_fasta(uniprot_id):
-    uniprot_url = f"https://www.uniprot.org/uniprot/{uniprot_id}.fasta"
-    response = requests.get(uniprot_url)
-    if response.status_code == 200:
-        fasta = Fasta(response.text)
-        return fasta
-    else:
-        raise Exception(
-            f"Status code {response.status_code} for the following URL request: {uniprot_url} "
-        )
-
-
 def find_n_glycosylation_motif(uniprot_ids: list):
     n_glycosylation = collections.defaultdict(list)
     n_glyc_pattern = "N[^P][ST][^P]"
     motif_length = 4
 
     for uniprot_id in uniprot_ids:
-        fasta = get_uniprot_fasta(uniprot_id)
+        uniprot_url = f"https://www.uniprot.org/uniprot/{uniprot_id}.fasta"
+        fasta = Fasta.from_url(uniprot_url)
         for i in range(len(fasta) + 1 - motif_length):
             match = re.match(n_glyc_pattern, fasta.sequence[i:])
             if match:

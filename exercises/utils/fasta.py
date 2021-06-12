@@ -1,4 +1,5 @@
 import sys
+from requests import request
 
 
 class Fasta:
@@ -11,6 +12,16 @@ class Fasta:
         self.sequence = "".join(split[1:]).upper()
         if len(self.sequence) == 0:
             raise ValueError("FASTA sequence must be at least 1 character long")
+
+    @classmethod
+    def from_url(cls, url):
+        response = request.get(url)
+        if response.status_code == 200:
+            return cls(response.text)
+        else:
+            raise Exception(
+                f"Unable to retrieve fasta: response status code {response.status_code}"
+            )
 
     def __repr__(self):
         return self.identifier

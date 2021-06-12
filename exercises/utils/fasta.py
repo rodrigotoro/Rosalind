@@ -1,5 +1,5 @@
 import sys
-from requests import request
+import requests
 
 
 class Fasta:
@@ -15,7 +15,7 @@ class Fasta:
 
     @classmethod
     def from_url(cls, url):
-        response = request.get(url)
+        response = requests.get(url)
         if response.status_code == 200:
             return cls(response.text)
         else:

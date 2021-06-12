@@ -7,13 +7,13 @@ class Fasta:
             raise ValueError('Provided FASTA string does not start with ">"')
 
         split = fasta_string.split("\n")
-        self.identifier = split[0].lstrip(">")
+        self.identifier = split[0]
         self.sequence = "".join(split[1:]).upper()
         if len(self.sequence) == 0:
-            raise ValueError("FASTA sequence must be at least 1 bp long")
+            raise ValueError("FASTA sequence must be at least 1 character long")
 
     def __repr__(self):
-        return self.sequence
+        return self.identifier
 
     def __len__(self):
         return len(self.sequence)

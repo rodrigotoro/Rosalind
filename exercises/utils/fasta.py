@@ -20,7 +20,7 @@ class Fasta:
             return cls(response.text)
         else:
             raise Exception(
-                f"Unable to retrieve fasta: response status code {response.status_code}"
+                f"Unable to retrieve FASTA: response status code {response.status_code}"
             )
 
     def __repr__(self):

@@ -1,6 +1,6 @@
 import argparse
 import requests
-from .utils.fasta import Fasta
+from utils.fasta import Fasta
 import re
 import collections
 

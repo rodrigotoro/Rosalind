@@ -1,5 +1,5 @@
 import argparse
-from .utils.fasta import Fasta
+from utils.fasta import Fasta
 
 sample_dataset = """>Rosalind_0498
 AAATAAA

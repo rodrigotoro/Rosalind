@@ -1,5 +1,5 @@
 import argparse
-from .utils.genetic_code import codons
+from utils.genetic_code import codons
 
 sample_dataset = "AUGGCCAUGGCGCCCAGAACUGAGAUCAAUAGUACCCGUAUUAACGGGUGA"
 

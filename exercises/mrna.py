@@ -1,5 +1,5 @@
 import argparse
-from .utils.genetic_code import aminoacids
+from utils.genetic_code import aminoacids
 
 
 sample_dataset = "MA"

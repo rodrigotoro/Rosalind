@@ -9,7 +9,7 @@ class Fasta:
 
         split = fasta_string.split("\n")
         self.identifier = split[0]
-        self.sequence = "".join(split[1:]).upper()
+        self.sequence = "".join(split[1:]).upper().strip()
         if len(self.sequence) == 0:
             raise ValueError("FASTA sequence must be at least 1 character long")
 
@@ -43,7 +43,7 @@ class Fasta:
                 max_length = len_seq
             for kmer_length in range(min_length, max_length + 1):
                 for pos in range(len_seq + 1 - kmer_length):
-                    kmer = self.sequence[pos : pos + kmer_length]
+                    kmer = self.sequence[pos: pos + kmer_length]
                     kmers.add(kmer)
         else:
             if max_length:
@@ -55,13 +55,6 @@ class Fasta:
                     f"Requested length is longer than length of sequence (length {len(self)})"
                 )
             for pos in range(len_seq + 1 - length):
-                kmers.add(self.sequence[pos : pos + length])
+                kmers.add(self.sequence[pos: pos + length])
 
         return kmers
-
-
-if __name__ == "__main__":
-    fasta_string = ">Test1\nACTGA"
-    f = Fasta(fasta_string)
-    a = f.get_kmers(length=6)
-    print(a)
